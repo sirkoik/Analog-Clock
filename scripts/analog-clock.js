@@ -1,12 +1,16 @@
-const VERSION = '0.0.2';
+const VERSION = '0.0.3';
 
 var running = true;
 var roundedMinSec = false;
+var numberType = -1;        // type of numbers used in face. default is none.
 
 //var tickTime = 200;
 //window.onload = () => setInterval(() => tick(), tickTime);
 
-window.onload = () => colorize();
+window.onload = () => {
+    colorize()
+    numberFill();
+};
 
 function tick() {
     if (!running) return false;
@@ -30,10 +34,39 @@ function tick() {
     document.querySelector('.hand-second').style.transform = 'rotate('+secRotation+'deg)';
     
     // text on hands.
-    document.querySelector('.hand-hour').textContent = sig3(Math.round(hr * 1000) / 1000);
-    document.querySelector('.hand-minute').textContent = sig3(Math.round(min * 1000) / 1000);
-    document.querySelector('.hand-second').textContent = sig3(sec);
+
+    var hNum = numOnHands(hr, min, sec);
+    document.querySelector('.hand-hour').textContent = hNum[0];
+    document.querySelector('.hand-minute').textContent = hNum[1];
+    document.querySelector('.hand-second').textContent = hNum[2];
     window.requestAnimationFrame(tick);
+}
+
+function numOnHands(hr, min, sec) {
+    switch(numberType) {
+        case 1: return [
+            sig3(Math.round(hr * 1000) / 1000),
+            sig3(Math.round(min * 1000) / 1000),
+            sig3(sec)
+        ];
+        case 2: return [decToRoman(hr), decToRoman(min), decToRoman(sec)];
+        case 3: return [decToBin(hr), decToBin(min), decToBin(sec)];
+
+        default: return ['', '', ''];
+    }
+}
+
+// decToRoman: convert a decimal to a roman numeral, up to 60.
+// first number is empty because roman numerals do not have a concept of zero.
+function decToRoman(num) {
+    var romans = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX', 'XX', 'XXI', 'XXII', 'XXIII', 'XXIV', 'XXV', 'XXVI', 'XXVII', 'XXVIII', 'XXIX', 'XXX', 'XXXI', 'XXXII', 'XXXIII', 'XXXIV', 'XXXV', 'XXXVI', 'XXXVII', 'XXXVIII', 'XXXIX', 'XL', 'XLI', 'XLII', 'XLIII', 'XLIV', 'XLV', 'XLVI', 'XLVII', 'XLVIII', 'XLIX', 'L', 'LI', 'LII', 'LIII', 'LIV', 'LV', 'LVI', 'LVII', 'LVIII', 'LIX', 'LX'];
+    return romans[Math.floor(num)];
+}
+
+// decToBin: convert a decimal to a binary string.
+// courtesy https://stackoverflow.com/questions/9939760/how-do-i-convert-an-integer-to-binary-in-javascript#16155417
+function decToBin(num) {
+    return (num >>> 0).toString(2);
 }
 
 // sig3: keep the number of digits constant so that the numbers don't jump around
@@ -80,6 +113,8 @@ function toggleStyle() {
 
 // colorize: Give the watch face, hands and random colors that aren't too close to one another.
 function colorize() {
+    numberFill();
+
     var foreColor = 0;
     var backColor = 0;
 
@@ -100,4 +135,24 @@ function colorize() {
 
     backColor = Math.floor(backColor);
     document.body.style.backgroundImage = 'linear-gradient(to bottom right, hsl('+backColor+',50%,80%), hsl('+backColor+',50%,50%))';
+}
+
+// numberFill: Place numbers into the clock squares based on a random selection.
+// note - one option has no numbers on the clock squares.
+var prevNumber = -1;
+function numberFill() {
+    numbers = [
+        ['', '', '', '', '', '', '', '', '', '', '', ''],
+        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'],
+        ['1', '10', '11', '100', '101', '110', '111', '1000', '1001', '1100', '1101', '1110']
+    ];
+
+    while (numberType == prevNumber) numberType = Math.floor(Math.random() * numbers.length);
+
+    var squares = document.querySelectorAll('.square');
+    for (var x = 0; x < squares.length; x++) {
+        squares[x].textContent = numbers[numberType][x];
+    }
+    prevNumber = numberType;
 }

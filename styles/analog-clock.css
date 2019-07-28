@@ -84,7 +84,9 @@ a {
     font-family: monospace;
     font-size: 25px;
     text-align: center;
-    line-height: 100px;    
+    line-height: 100px;
+
+    /* box-shadow: 0px 0px 2px white; */
 }
 
 .hand-hour {
