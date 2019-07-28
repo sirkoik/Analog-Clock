@@ -1,0 +1,115 @@
+a {
+    text-decoration: none;
+}
+
+.square {
+    position: fixed;
+
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50px;
+
+    font-family: sans-serif;
+    font-size: 25px;
+    text-align: center;
+    line-height: 100px;
+}
+
+.sq-top {
+    top: 10px;
+}
+
+.sq-middle {
+    left: 50%;
+    margin-left: -50px;
+}
+
+.sq-bottom {
+    bottom: 10px;
+}
+
+.sq-left {
+    left: 10px;
+}
+
+.sq-center {
+    top: 50%;
+    margin-top: -50px;
+}
+
+.sq-right {
+    right: 10px;
+}
+
+.sq-l-1 {
+    left: 25%;
+    margin-left: -50px;
+}
+
+.sq-t-1 {
+    top: 25%;
+    margin-top: -50px;
+}
+
+.sq-r-1 {
+    right: 25%;
+    margin-right: -50px;
+}
+
+.sq-b-1 {
+    top: 75%;
+    margin-top: -50px;
+}
+
+.sq-pivot {
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+.hand {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    background: gray;
+
+    opacity: 0.7;
+    border-radius: 50px;
+
+    font-family: monospace;
+    font-size: 25px;
+    text-align: center;
+    line-height: 100px;    
+}
+
+.hand-hour {
+    width: 150px;
+    height: 100px;
+    margin-left: 50px;
+
+    transform: rotate(-90deg);
+    transform-origin: -50px 50px;
+}
+
+.hand-minute {
+    width: 200px;
+    height: 100px;
+    margin-left: 50px;
+
+    transform: rotate(-90deg);
+    transform-origin: -50px 50px;
+}
+
+.hand-second {
+    width: 250px;
+    height: 100px;
+    margin-left: 50px;
+
+    transform: rotate(-90deg);
+    transform-origin: -50px 50px;
+}
