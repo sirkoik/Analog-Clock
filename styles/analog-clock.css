@@ -1,5 +1,29 @@
 a {
-    text-decoration: none;
+    /*text-decoration: none;*/
+}
+
+.hint {
+    animation: hintFade 2s 5s forwards;
+
+    position: absolute;
+    z-index: 20;
+
+    width: 200px;
+    margin: 20px 0 0 20px;
+    padding: 50px;
+    border-radius: 50px;
+
+    color: black;
+    background: lightblue;
+
+    font-family: monospace;
+    font-size: 25px;
+    box-shadow: 5px 5px 5px;
+}
+
+@keyframes hintFade {
+    from {opacity: 1.0}
+    to {opacity: 0}
 }
 
 .square {

@@ -1,7 +1,7 @@
 const VERSION = '0.0.3';
 
 var running = true;
-var roundedMinSec = false;
+var roundedMinSec = false;  // "Direct drive" movement of minute and second hands in intervals.
 var numberType = -1;        // type of numbers used in face. default is none.
 
 //var tickTime = 200;
@@ -138,13 +138,15 @@ function colorize() {
 }
 
 // numberFill: Place numbers into the clock squares based on a random selection.
-// note - one option has no numbers on the clock squares.
+// The first option has no numbers on the clock squares.
+// On clock faces with Roman numerals, IIII is used more commonly than IV. https://www.bernardwatch.com/Glossary-of-Watch-Terms
+// This app uses IIII on the numerals and IV on the hand numbers. 
 var prevNumber = -1;
 function numberFill() {
     numbers = [
         ['', '', '', '', '', '', '', '', '', '', '', ''],
         ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-        ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'],
+        ['I', 'II', 'III', 'IIII', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'],
         ['1', '10', '11', '100', '101', '110', '111', '1000', '1001', '1100', '1101', '1110']
     ];
 
