@@ -151,7 +151,8 @@ function numberFill() {
     while (numberType == prevNumber) numberType = Math.floor(Math.random() * numbers.length);
 
     var squares = document.querySelectorAll('.square');
-    for (var x = 0; x < squares.length; x++) {
+    // squares.length - 1 avoids overwriting the 'hub' square with its link
+    for (var x = 0; x < squares.length - 1; x++) {
         squares[x].textContent = numbers[numberType][x];
     }
     prevNumber = numberType;
