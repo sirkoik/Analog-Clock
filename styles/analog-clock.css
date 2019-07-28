@@ -1,4 +1,8 @@
-body {
+.div-ios-clickable {
+    z-index: 21;
+
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
     cursor: pointer;
 }
 
@@ -88,6 +92,8 @@ body {
 }
 
 .sq-pivot {
+    z-index: 22;
+
     top: 50%;
     left: 50%;
     margin-top: -50px;
