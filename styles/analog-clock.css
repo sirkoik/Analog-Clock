@@ -7,6 +7,7 @@
 }
 
 .hint {
+    /* display: none; */
     animation: hintFade 2s 5s forwards;
 
     position: absolute;
