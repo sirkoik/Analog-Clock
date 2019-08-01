@@ -131,7 +131,7 @@ class AnalogClock {
 
     // isNumeric: qualify input for numeric
     isNumeric(num) {
-        return !isNaN(num) && num !== undefined;
+        return !isNaN(num) && num !== undefined && num !== null;
     }
 
 }
