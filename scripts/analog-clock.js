@@ -16,7 +16,6 @@ window.onload = () => {
         clock1.runClock();
     } catch(e) {
         console.log(e);
-        console.log('Running finished');
     }
 };
 
