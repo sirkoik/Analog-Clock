@@ -54,7 +54,11 @@ class ClockMath {
             ];
             case 2: return [this.decToRoman(hr), this.decToRoman(min), this.decToRoman(sec)];
             case 3: return [this.decToBin(hr), this.decToBin(min), this.decToBin(sec)];
-    
+            case 4: return [
+                new Number(hr).toString(16).substr(0, 7),
+                new Number(min).toString(16).substr(0, 7),
+                new Number(sec).toString(16).substr(0, 7)
+            ];
             default: return ['', '', ''];
         }
     }
@@ -110,14 +114,15 @@ class ClockMath {
             ['', '', '', '', '', '', '', '', '', '', '', ''],
             ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
             ['I', 'II', 'III', 'IIII', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'],
-            ['1', '10', '11', '100', '101', '110', '111', '1000', '1001', '1100', '1101', '1110']
+            ['1', '10', '11', '100', '101', '110', '111', '1000', '1001', '1100', '1101', '1110'],
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
         ];
 
         return numbers[this.numberType] !== undefined? numbers[this.numberType] : numbers[0];
     }
 
     getFaceNumbersRand() {
-        while (this.numberType === this.prevNumber) this.numberType = Math.floor(Math.random() * 4);
+        while (this.numberType === this.prevNumber) this.numberType = Math.floor(Math.random() * 5);
         
         this.prevNumber = this.numberType;
         return this.getFaceNumbers(this.numberType);

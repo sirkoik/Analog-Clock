@@ -1,4 +1,4 @@
-const VERSION = '0.0.5';
+const VERSION = '0.0.6';
 
 var running = true;
 var roundedMinSec = false;  // "Direct drive" movement of minute and second hands in intervals.
