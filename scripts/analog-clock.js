@@ -1,4 +1,4 @@
-const VERSION = '0.0.4';
+const VERSION = '0.0.5';
 
 var running = true;
 var roundedMinSec = false;  // "Direct drive" movement of minute and second hands in intervals.
@@ -7,7 +7,6 @@ var numberType = -1;        // type of numbers used in face. default is none.
 document.title += ' v' + VERSION;
 
 window.onload = () => {
-    console.log('Running...');
     clock1 = new AnalogClock();
     clock1.runClock();
 };

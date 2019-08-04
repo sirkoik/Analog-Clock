@@ -18,7 +18,10 @@ class AnalogClock {
         var type = parseInt(params.get('mode'));
         var foreColor = params.get('fg');
         var backColor = params.get('bg');
-        
+        var showHint = params.get('showHint');
+
+        if (showHint === 'false') document.querySelector('.hint').style.display = 'none';
+
         if (this.isNumeric(type)) {
             if (type < 0) type = 0;
             this.numberType = type;
@@ -126,6 +129,7 @@ class AnalogClock {
         params.set('fg', foreColor);
         params.set('bg', backColor);
         params.set('mode', numberType);
+        params.set('showHint', false)
         window.history.replaceState({}, '', '?'+params.toString());
     }
 
