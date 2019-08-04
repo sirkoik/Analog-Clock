@@ -1,5 +1,3 @@
-console.log('ClockMath class loaded.');
-
 class ClockMath {
     // addLeadingZero: add a zero to all single-digit leading numbers
     addLeadingZero = false;
