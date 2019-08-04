@@ -12,7 +12,7 @@ document.title += ' v' + VERSION;
 window.onload = () => {
     try {
         console.log('Running...');
-        let clock1 = new AnalogClock();
+        clock1 = new AnalogClock();
         clock1.runClock();
     } catch(e) {
         console.log(e);
