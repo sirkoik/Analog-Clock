@@ -1,5 +1,4 @@
 // AnalogClock class
-console.log('the AnalogClock class can be read.');
 class AnalogClock {
     running = false;
     directDrive = false; // second and minute hands move in intervals instead of smoothly.
