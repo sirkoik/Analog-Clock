@@ -1,19 +1,19 @@
 console.log('This is the ClockMath class.');
 
 class ClockMath {
-    // // addLeadingZero: add a zero to all single-digit leading numbers
-    // addLeadingZero = false;
-    // directDrive = false;
+    // addLeadingZero: add a zero to all single-digit leading numbers
+    addLeadingZero = false;
+    directDrive = false;
 
-    // // numberType: Type of clock face.
-    // numberType = -1;
-    // prevNumber = -1;
+    // numberType: Type of clock face.
+    numberType = -1;
+    prevNumber = -1;
 
-    // constructor(args) {
-    //     if (args) {
-    //         if (args.directDrive) this.directDrive = args.directDrive;
-    //     }
-    // }
+    constructor(args) {
+        if (args) {
+            if (args.directDrive) this.directDrive = args.directDrive;
+        }
+    }
 
     // getHMS() {
     //     var tObj = {
