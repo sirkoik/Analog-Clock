@@ -8,6 +8,10 @@ class AnalogClock {
 
     _defineProperty(this, "directDrive", false);
 
+    _defineProperty(this, "fg", 0);
+
+    _defineProperty(this, "bg", 0);
+
     _defineProperty(this, "numberType", -1);
 
     _defineProperty(this, "clockMath", void 0);
@@ -23,8 +27,18 @@ class AnalogClock {
     var foreColor = params.get('fg');
     var backColor = params.get('bg');
     var showHint = params.get('showHint');
-    
+    var directDrv = params.get('directDrive');
     if (showHint === 'false') document.querySelector('.hint').style.display = 'none';
+
+    if (directDrv === 'true') {
+      this.directDrive = true;
+      this.clockMath.directDrive = true;
+    } else if (directDrv === 'false') {
+      this.directDrive = false;
+      this.clockMath.directDrive = false;
+    }
+
+    if (directDrv === undefined) this.setDDRand();
 
     if (this.isNumeric(type)) {
       if (type < 0) type = 0;
@@ -36,14 +50,20 @@ class AnalogClock {
     }
 
     if (this.isNumeric(backColor) && this.isNumeric(foreColor)) {
-      this.setColors(foreColor, backColor);
+      this.bg = backColor;
+      this.fg = foreColor;
+      this.setColors();
     } else {
       this.setColorsRand();
     }
 
+    this.replaceHistState(); // randomize parameters onclick and save
+
     document.onclick = () => {
       this.setNumbersRand();
       this.setColorsRand();
+      this.setDDRand();
+      this.replaceHistState();
     };
   } // runClock: get the clock started.
 
@@ -92,45 +112,51 @@ class AnalogClock {
   } // setColors: Color watch face and hands.
 
 
-  setColors(foreColor, backColor) {
+  setColors() {
     var squares = document.querySelectorAll('.square');
 
     for (var square of squares) {
-      square.style.backgroundColor = 'hsl(' + foreColor + ',50%,50%)';
+      square.style.backgroundColor = 'hsl(' + this.fg + ',50%,50%)';
     }
 
     var hands = document.querySelectorAll('.hand');
 
     for (var hand of hands) {
-      hand.style.backgroundColor = 'hsl(' + foreColor + ',20%,50%)';
+      hand.style.backgroundColor = 'hsl(' + this.fg + ',20%,50%)';
     }
 
-    var backColorFlr = Math.floor(backColor);
+    var backColorFlr = Math.floor(this.bg);
     document.body.style.backgroundImage = 'linear-gradient(to bottom right, hsl(' + backColorFlr + ',50%,80%), hsl(' + backColorFlr + ',50%,50%))';
-    this.replaceHistState(foreColor, backColor, this.numberType);
   } // setColorsRand: Color watch face and hands with random colors
   // that are reasonably complimentary.
 
 
   setColorsRand() {
-    var foreColor = 0,
-        backColor = 0;
+    this.fg = 0;
+    this.bg = 0;
 
-    while (Math.abs(foreColor - backColor) < 10) {
-      foreColor = Math.floor(Math.random() * 255);
-      backColor = Math.floor(Math.random() * 255);
+    while (Math.abs(this.fg - this.bg) < 10) {
+      this.fg = Math.floor(Math.random() * 255);
+      this.bg = Math.floor(Math.random() * 255);
     }
 
-    this.setColors(foreColor, backColor);
+    this.setColors();
+  } // setDDRand: randomly set direct drive state.
+
+
+  setDDRand() {
+    this.directDrive = Math.random() >= 0.5 ? true : false;
+    this.clockMath.directDrive = this.directDrive;
   } // replaceHistState: save the clock state into the URL query string.
 
 
-  replaceHistState(foreColor, backColor, numberType) {
+  replaceHistState() {
     const params = new URLSearchParams();
-    params.set('fg', foreColor);
-    params.set('bg', backColor);
-    params.set('mode', numberType);
+    params.set('fg', this.fg);
+    params.set('bg', this.bg);
+    params.set('mode', this.numberType);
     params.set('showHint', false);
+    params.set('directDrive', this.directDrive);
     window.history.replaceState({}, '', '?' + params.toString());
   } // isNumeric: qualify input for numeric
 
